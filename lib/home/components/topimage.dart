@@ -40,7 +40,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
           AnimatedSwitcher(
             duration: const Duration(seconds: 1),
             child: Image(
-              image: AssetImage(images[index]),
+              image: AssetImage("assets/${images[index]}"),
               frameBuilder: (context, child, frame, wasSynchronouslyLoaded){
                 return child;
               },
@@ -65,7 +65,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
               fit: BoxFit.cover,
               height: MediaQuery.of(context).size.height-appBarHeight,
               width: MediaQuery.of(context).size.width,
-              key: ValueKey<String>(images[index]),
+              key: ValueKey<String>("assets/${images[index]}"),
             ),
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(opacity: animation, child: child);
