@@ -65350,7 +65350,7 @@ s=A.T(153,62,39,35)
 r=A.bp(a,p,m).w
 q=$.abY
 m=A.bp(a,p,m).w
-return A.aaW(!0,A.vs(B.dx,A.a([new A.qr(new A.nT(new A.l5(n,p,p),new A.a4s(),new A.a4t(),j.a.a,l.a.b-k,B.wz,new A.cS(o,t.kK)),B.cv,new A.a4u(),p),A.ns(p,A.Qc(new A.dT(new A.bc(20,20,20,20),A.p_("Crafting Dreams, Shaping Spaces",A.av4().$2$color$fontSize(B.i,100),B.eL),p),p,p),s,p,p,r.a.b-q,p,p,m.a.a)],t.F),B.dl),B.ar,!0)}}
+return A.aaW(!0,A.vs(B.dx,A.a([new A.qr(new A.nT(new A.l5("assets/"+n,p,p),new A.a4s(),new A.a4t(),j.a.a,l.a.b-k,B.wz,new A.cS("assets/"+o,t.kK)),B.cv,new A.a4u(),p),A.ns(p,A.Qc(new A.dT(new A.bc(20,20,20,20),A.p_("Crafting Dreams, Shaping Spaces",A.av4().$2$color$fontSize(B.i,100),B.eL),p),p,p),s,p,p,r.a.b-q,p,p,m.a.a)],t.F),B.dl),B.ar,!0)}}
 A.a4r.prototype={
 $1(a){var s=this.a
 s.aq(new A.a4q(s))},
