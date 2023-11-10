@@ -72,18 +72,63 @@ class _ImageCarouselState extends State<ImageCarousel> {
             },
           ),
           Container(
-            color: Colors.brown[900]!.withOpacity(0.6),
-            height: MediaQuery.of(context).size.height - appBarHeight,
-            width: MediaQuery.of(context).size.width,
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Text("Crafting Dreams, Shaping Spaces", style: GoogleFonts.dancingScript(color: Colors.white,fontSize: 100),textAlign: TextAlign.center,)
+              color: Colors.brown[900]!.withOpacity(0.6),
+              height: MediaQuery.of(context).size.height - appBarHeight,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                  child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text("Crafting Dreams, Shaping Spaces", style: GoogleFonts.dancingScript(color: Colors.white,fontSize: 100),textAlign: TextAlign.center,)
+                  )
               )
-            )
           )
         ],
       )
     );
   }
 }
+
+class CarouselText extends StatefulWidget {
+  const CarouselText({Key? key}) : super(key: key);
+
+  @override
+  State<CarouselText> createState() => _CarouselTextState();
+}
+
+class _CarouselTextState extends State<CarouselText> {
+  bool _isVisible = false;
+
+  @override
+  void initState(){
+    super.initState();
+    WidgetsFlutterBinding().addPostFrameCallback((timeStamp) { });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedOpacity(
+      duration: Duration(milliseconds: 500),
+      opacity: _isVisible ? 1.0 : 0.0,
+      child: AnimatedContainer(
+          duration: Duration(milliseconds: 500),
+          transform: Matrix4.translationValues(
+            0.0,
+            _isVisible ? 0.0 : 50.0,
+            0.0,
+          ),
+          child: Container(
+              color: Colors.brown[900]!.withOpacity(0.6),
+              height: MediaQuery.of(context).size.height - appBarHeight,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                  child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text("Crafting Dreams, Shaping Spaces", style: GoogleFonts.dancingScript(color: Colors.white,fontSize: 100),textAlign: TextAlign.center,)
+                  )
+              )
+          )
+      ),
+    );
+  }
+}
+

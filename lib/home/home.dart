@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jr_group/home/components/navbarbuttons.dart';
@@ -8,11 +9,19 @@ import '../res/constants.dart';
 import '../view model/responsive.dart';
 import 'components/about.dart';
 import 'components/drawer_item.dart';
+import 'components/history.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
-  final ScrollController _scrollController = ScrollController();
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late final ScrollController _scrollController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _isVisible = false;
 
   List<Widget> desktopAppBarActions(context){
     return [
@@ -26,24 +35,28 @@ class HomeScreen extends StatelessWidget {
         ),
       ):const SizedBox(),
       if(!Responsive.isTablet(context))IconButton(
+        tooltip: 'LinkedIn',
         icon: const FaIcon(FontAwesomeIcons.linkedin),
         onPressed: (){
 
         },
       ),
       if(!Responsive.isTablet(context))IconButton(
+        tooltip: 'Instagram',
         icon: const FaIcon(FontAwesomeIcons.instagram),
         onPressed: (){
 
         },
       ),
       if(!Responsive.isTablet(context))IconButton(
+        tooltip: 'Twitter',
         icon: const FaIcon(FontAwesomeIcons.twitter),
         onPressed: (){
 
         },
       ),
       if(!Responsive.isTablet(context))IconButton(
+        tooltip: 'Facebook',
         icon: const FaIcon(FontAwesomeIcons.facebook),
         onPressed: (){
 
@@ -51,6 +64,27 @@ class HomeScreen extends StatelessWidget {
       ),
       if(!Responsive.isTablet(context))SizedBox(width: appBarPadding/3,)
     ];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels>0) {
+        if (!_isVisible) {
+          setState(() {
+            _isVisible = true;
+          });
+        }
+      } else {
+        if (_isVisible) {
+          setState(() {
+            _isVisible = false;
+          });
+        }
+      }
+    });
   }
 
   @override
@@ -63,21 +97,21 @@ class HomeScreen extends StatelessWidget {
       key: _scaffoldKey,
       appBar: AppBar(
         leading: Responsive.isTablet(context)?Padding(
-          padding: const EdgeInsets.all(10),
-          child: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/JR_logo.png'),
-                    fit: BoxFit.contain
-                )
-            ),
-          )
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/JR_logo.png'),
+                      fit: BoxFit.contain
+                  )
+              ),
+            )
         ): const SizedBox(),
         leadingWidth: Responsive.isTablet(context)?appBarPadding:0,
         centerTitle: true,
         title: !Responsive.isTablet(context)?
         Padding(
-          padding: EdgeInsets.only(right: 0),
+          padding: const EdgeInsets.only(right: 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -85,7 +119,7 @@ class HomeScreen extends StatelessWidget {
               NavBarButton(title: 'HOME', widgetKey: homeKey,),
               // const SizedBox(width: 50,),
               NavBarButton(title: 'ABOUT', widgetKey: aboutKey,),
-              NavBarButton(title: 'INDUSTRIES', widgetKey: industryKey,),
+              NavBarButton(title: 'HERITAGE & CULTURE', widgetKey: heritageKey,),
               NavBarButton(title: 'CSR', widgetKey: csrKey,),
               // const SizedBox(width: 50,),
               NavBarButton(title: 'BLOG', widgetKey: blogKey,),
@@ -108,25 +142,27 @@ class HomeScreen extends StatelessWidget {
       ),
       body: ListView(
         controller: _scrollController,
-          children: [
-            ImageCarousel(
-              key: homeKey,
-            ),
-            About(key: aboutKey)
-          ],
+        children: [
+          ImageCarousel(
+            key: homeKey,
+          ),
+          About(key: aboutKey),
+          JRHistory(key: heritageKey)
+        ],
 
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: _isVisible?FloatingActionButton(
         tooltip: 'Back to top',
         child: const Icon(Icons.keyboard_arrow_up),
         onPressed: (){
           _scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
         },
-      ),
+      ):null,
     );
   }
 }
+
 
 class Industries extends StatefulWidget {
   const Industries({Key? key}) : super(key: key);

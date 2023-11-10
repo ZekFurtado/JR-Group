@@ -1,207 +1,86 @@
 import 'package:flutter/material.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
+}
+
+class RoadmapItem {
+  final String title;
+  final String description;
+  final DateTime date;
+
+  RoadmapItem({required this.title, required this.description, required this.date});
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Flutter Roadmap'),
+        ),
+        body: Roadmap(),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  OverlayState? overlayState;
-  OverlayEntry? overlayEntry;
-  OverlayEntry? overlayEntry2;
-  bool showOverlay = false;
-  int index = 0;
-  List<Widget> widgets = [
-    Container(
-        height: 40,
-        width: 60,
-        color: Colors.transparent
+class Roadmap extends StatelessWidget {
+  final List<RoadmapItem> roadmapItems = [
+    RoadmapItem(
+      title: 'Step 1',
+      description: 'Learn Dart Basics',
+      date: DateTime(2023, 1, 1),
     ),
-    Container(
-        height: 40,
-        width: 60,
-        color: Colors.transparent
+    RoadmapItem(
+      title: 'Step 2',
+      description: 'Explore Flutter Widgets',
+      date: DateTime(2023, 2, 1),
     ),
-    Container(
-      height: 300,
-      width: 300,
-      color: Colors.green,
-      child: TextButton(
-        child: Text('Click Me'),
-        onPressed: (){
-          print('Clicked');
-        },
-      ),
+    RoadmapItem(
+      title: 'Step 3',
+      description: 'Build Simple Apps',
+      date: DateTime(2023, 3, 1),
     ),
-    Container(
-      height: 300,
-      width: 300,
-      color: Colors.black,
-      child: TextButton(child: Text('Click Me'),
-        onPressed: (){
-          print('Clicked');
-        },
-      ),
+    RoadmapItem(
+      title: 'Step 4',
+      description: 'Learn State Management',
+      date: DateTime(2023, 4, 1),
     ),
+    // Add more roadmap items as needed
   ];
-  final layerLink = LayerLink();
-  final textButtonFocusNode = FocusNode();
-  final textButtonFocusNode1 = FocusNode();
-
-
-  void _showOverlay(BuildContext context, int index) async {
-    overlayState = Overlay.of(context)!;
-
-    overlayEntry = OverlayEntry(
-        maintainState: true,
-        builder: (context) {
-          return Positioned(
-            left:index==0?  MediaQuery.of(context).size.width * 0.43 : MediaQuery.of(context).size.width *  0.5,
-            top: MediaQuery.of(context).size.height * 0.09,
-            child: TextButton(
-              onPressed: () {},
-              onHover: (val) {
-                if (val && showOverlay) {
-                  if (index == 0) {
-                    textButtonFocusNode.requestFocus();
-                  } else if (index == 1) {
-                    textButtonFocusNode1.requestFocus();
-                  }
-                } else {
-                  if (index == 0) {
-                    textButtonFocusNode.unfocus();
-                  } else if (index == 1) {
-                    textButtonFocusNode1.unfocus();
-                  }
-                }
-              },
-              child: widgets[index],
-            ),
-          );
-        });
-    overlayEntry2 = OverlayEntry(
-        maintainState: true,
-        builder: (context) {
-          return Positioned(
-            left:index==0?  MediaQuery.of(context).size.width * 0.43 : MediaQuery.of(context).size.width *  0.5,
-            top: MediaQuery.of(context).size.height * 0.13,
-            child: TextButton(
-              onPressed: () {},
-              onHover: (val) {
-                if (val && showOverlay) {
-                  if (index == 0) {
-                    textButtonFocusNode.requestFocus();
-                  } else if (index == 1) {
-                    textButtonFocusNode1.requestFocus();
-                  }
-                } else {
-                  if (index == 0) {
-                    textButtonFocusNode.unfocus();
-                  } else if (index == 1) {
-                    textButtonFocusNode1.unfocus();
-                  }
-                }
-              },
-              child: widgets[index+2],
-            ),
-          );
-        });
-
-    // overlayState!.insert(overlayEntry!);
-    overlayState!.insertAll([overlayEntry!, overlayEntry2!]);
-  }
-
-  void removeOverlay() {
-    overlayEntry!.remove();
-    overlayEntry2!.remove();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    textButtonFocusNode.addListener(() {
-      if (textButtonFocusNode.hasFocus) {
-        _showOverlay(context, 0);
-      } else {
-        removeOverlay();
-      }
-    });
-    textButtonFocusNode1.addListener(() {
-      if (textButtonFocusNode1.hasFocus) {
-        _showOverlay(context, 1);
-      } else {
-        removeOverlay();
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-        height: 100,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-              focusNode: textButtonFocusNode,
-              onHover: (val) {
-                if (val) {
-                  textButtonFocusNode.requestFocus();
-                  showOverlay = true;
-                }
-              },
-              onPressed: () {},
-              child: const Text('Hover'),
-            ),
-            TextButton(
-              focusNode: textButtonFocusNode1,
-              onHover: (val) {
-                if (val) {
-                  textButtonFocusNode1.requestFocus();
-                  showOverlay = true;
-                }
-              },
-              onPressed: () {},
-              child: const Text('Hover'),
-            ),
-          ],
-        ),
+    return ListView.builder(
+      itemCount: roadmapItems.length,
+      itemBuilder: (BuildContext context, int index) {
+        return RoadmapCard(roadmapItem: roadmapItems[index], isLast: index == roadmapItems.length - 1);
+      },
+    );
+  }
+}
+
+class RoadmapCard extends StatelessWidget {
+  final RoadmapItem roadmapItem;
+  final bool isLast;
+
+  RoadmapCard({required this.roadmapItem, required this.isLast});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(roadmapItem.title),
+            subtitle: Text(roadmapItem.description),
+            trailing: Text('${roadmapItem.date.year}-${roadmapItem.date.month}-${roadmapItem.date.day}'),
+          ),
+          isLast ? Container() : Icon(Icons.arrow_downward),
+        ],
       ),
     );
   }

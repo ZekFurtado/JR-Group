@@ -79,6 +79,7 @@ double actionsLength = 0;
 final GlobalKey appBarKey = GlobalKey();
 final GlobalKey homeKey = GlobalKey();
 final GlobalKey aboutKey = GlobalKey();
+final GlobalKey heritageKey = GlobalKey();
 final GlobalKey industryKey = GlobalKey();
 final GlobalKey csrKey = GlobalKey();
 final GlobalKey blogKey = GlobalKey();
