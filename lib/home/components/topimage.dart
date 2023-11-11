@@ -50,7 +50,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                 }
                 else{
                   return SizedBox(
-                    height: MediaQuery.of(context).size.height-appBarHeight,
+                    height: MediaQuery.of(context).size.height-kToolbarHeight,
                     width: MediaQuery.of(context).size.width,
                     child: Center(
                       child: CircularProgressIndicator(
@@ -63,7 +63,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                 }
               },
               fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height-appBarHeight,
+              height: MediaQuery.of(context).size.height-kToolbarHeight,
               width: MediaQuery.of(context).size.width,
               key: ValueKey<String>("assets/${images[index]}"),
             ),
@@ -73,7 +73,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
           ),
           Container(
               color: Colors.brown[900]!.withOpacity(0.6),
-              height: MediaQuery.of(context).size.height - appBarHeight,
+              height: MediaQuery.of(context).size.height - kToolbarHeight,
               width: MediaQuery.of(context).size.width,
               child: Center(
                   child: Padding(
@@ -118,7 +118,7 @@ class _CarouselTextState extends State<CarouselText> {
           ),
           child: Container(
               color: Colors.brown[900]!.withOpacity(0.6),
-              height: MediaQuery.of(context).size.height - appBarHeight,
+              height: MediaQuery.of(context).size.height - kToolbarHeight,
               width: MediaQuery.of(context).size.width,
               child: Center(
                   child: Padding(

@@ -8,6 +8,7 @@ import 'package:jr_group/home/components/topimage.dart';
 import '../res/constants.dart';
 import '../view model/responsive.dart';
 import 'components/about.dart';
+import 'components/csr.dart';
 import 'components/drawer_item.dart';
 import 'components/history.dart';
 
@@ -91,7 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     edgePadding = MediaQuery.of(context).size.width*0.1;
     appBarPadding = MediaQuery.of(context).size.width*0.15;
-    appBarHeight = AppBar().preferredSize.height;
 
     return Scaffold(
       key: _scaffoldKey,
@@ -116,15 +116,91 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Image.asset('assets/JR_logo.png',width: 70,),
-              NavBarButton(title: 'HOME', widgetKey: homeKey,),
+              NavBarButton(
+                title: 'HOME',
+                widgetKey: homeKey,
+                onPressed: (){
+                  int index = keys.indexOf(homeKey);
+                  double offset = 0;
+                  for(int i=0;i<index;i++){
+                    offset += keys.elementAt(i).currentContext!.size!.height;
+                  }
+                  _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+                  // print(widgetKey.currentContext);
+                  // if(widgetKey.currentContext!=null){
+                  //   Scrollable.ensureVisible(
+                  //       widgetKey.currentContext!,
+                  //       duration: const Duration(milliseconds: 500),
+                  //       curve: Curves.easeIn
+                  //   );
+                  // }
+                },
+              ),
               // const SizedBox(width: 50,),
-              NavBarButton(title: 'ABOUT', widgetKey: aboutKey,),
-              NavBarButton(title: 'HERITAGE & CULTURE', widgetKey: heritageKey,),
-              NavBarButton(title: 'CSR', widgetKey: csrKey,),
+              NavBarButton(
+                title: 'ABOUT',
+                widgetKey: aboutKey,
+                onPressed: (){
+                  int index = keys.indexOf(aboutKey);
+                  print(index);
+                  double offset = 0;
+                  for(int i=0;i<index;i++){
+                    print(keys.elementAt(i).currentContext!);
+                    offset += keys.elementAt(i).currentContext!.size!.height;
+                  }
+                  _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+                },
+              ),
+              NavBarButton(
+                title: 'HERITAGE & CULTURE',
+                widgetKey: heritageKey,
+                onPressed: (){
+                  int index = keys.indexOf(heritageKey);
+                  double offset = 0;
+                  for(int i=0;i<index;i++){
+                    offset += keys.elementAt(i).currentContext!.size!.height;
+                  }
+                  _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+                },
+              ),
+              NavBarButton(
+                title: 'CSR',
+                widgetKey: csrKey,
+                onPressed: (){
+                  int index = keys.indexOf(csrKey);
+                  double offset = 0;
+                  for(int i=0;i<index;i++){
+                    offset += keys.elementAt(i).currentContext!.size!.height;
+                  }
+                  _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+                },
+              ),
               // const SizedBox(width: 50,),
-              NavBarButton(title: 'BLOG', widgetKey: blogKey,),
+              NavBarButton(
+                title: 'BLOG',
+                widgetKey: blogKey,
+                onPressed: (){
+                  int index = keys.indexOf(blogKey);
+                  double offset = 0;
+                  for(int i=0;i<index;i++){
+                    offset += keys.elementAt(i).currentContext!.size!.height;
+                  }
+                  _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+                },
+              ),
               // const SizedBox(width: 50,),
-              NavBarButton(title: 'CONTACT US', widgetKey: contactKey,),
+              NavBarButton(
+                title: 'CONTACT US',
+                widgetKey: contactKey,
+                onPressed: (){
+                  int index = keys.indexOf(contactKey);
+                  double offset = 0;
+                  for(int i=0;i<index;i++){
+                    offset += keys.elementAt(i).currentContext!.size!.height;
+                  }
+                  _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+                },
+              ),
             ],
           ),
         ):const SizedBox(),
@@ -133,23 +209,104 @@ class _HomeScreenState extends State<HomeScreen> {
       endDrawer: Drawer(
         child: Column(
           children: [
-            DrawerItem(title: 'HOME',widgetKey: homeKey,),
-            DrawerItem(title: 'ABOUT',widgetKey: aboutKey,),
-            DrawerItem(title: 'BLOG',widgetKey: blogKey,),
-            DrawerItem(title: 'CONTACT US',widgetKey: contactKey,),
+            DrawerItem(
+              title: 'HOME',
+              widgetKey: homeKey,
+              onPressed: (){
+                int index = keys.indexOf(homeKey);
+                double offset = 0;
+                for(int i=0;i<index;i++){
+                  offset += keys.elementAt(i).currentContext!.size!.height;
+                }
+                _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+                // print(widgetKey.currentContext);
+                // if(widgetKey.currentContext!=null){
+                //   Scrollable.ensureVisible(
+                //       widgetKey.currentContext!,
+                //       duration: const Duration(milliseconds: 500),
+                //       curve: Curves.easeIn
+                //   );
+                // }
+              },
+            ),
+            DrawerItem(
+              title: 'ABOUT',
+              widgetKey: aboutKey,
+              onPressed: (){
+                int index = keys.indexOf(aboutKey);
+                print(index);
+                double offset = 0;
+                for(int i=0;i<index;i++){
+                  print(keys.elementAt(i).currentContext!);
+                  offset += keys.elementAt(i).currentContext!.size!.height;
+                }
+                _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+              },
+            ),
+            DrawerItem(
+              title: 'HERITAGE & CULTURE',
+              widgetKey: heritageKey,
+              onPressed: (){
+                int index = keys.indexOf(heritageKey);
+                double offset = 0;
+                for(int i=0;i<index;i++){
+                  offset += keys.elementAt(i).currentContext!.size!.height;
+                }
+                _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+              },
+            ),
+            DrawerItem(
+              title: 'CSR',
+              widgetKey: csrKey,
+              onPressed: (){
+                int index = keys.indexOf(csrKey);
+                double offset = 0;
+                for(int i=0;i<index;i++){
+                  offset += keys.elementAt(i).currentContext!.size!.height;
+                }
+                _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+              },
+            ),
+            DrawerItem(
+              title: 'BLOG',
+              widgetKey: blogKey,
+              onPressed: (){
+                int index = keys.indexOf(blogKey);
+                double offset = 0;
+                for(int i=0;i<index;i++){
+                  offset += keys.elementAt(i).currentContext!.size!.height;
+                }
+                _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+              },
+            ),
+            DrawerItem(
+              title: 'CONTACT US',
+              widgetKey: contactKey,
+              onPressed: (){
+                int index = keys.indexOf(contactKey);
+                double offset = 0;
+                for(int i=0;i<index;i++){
+                  offset += keys.elementAt(i).currentContext!.size!.height;
+                }
+                _scrollController.animateTo(offset, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+              },
+            ),
           ],
         ),
       ),
-      body: ListView(
-        controller: _scrollController,
-        children: [
-          ImageCarousel(
-            key: homeKey,
-          ),
-          About(key: aboutKey),
-          JRHistory(key: heritageKey)
-        ],
+      body: SingleChildScrollView(
+          controller: _scrollController,
+        child: Column(
+          children: [
+            ImageCarousel(
+              key: homeKey,
+            ),
+            About(key: aboutKey),
+            JRHistory(key: heritageKey),
+            CSR(key: csrKey)
+          ],
 
+        ),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButton: _isVisible?FloatingActionButton(

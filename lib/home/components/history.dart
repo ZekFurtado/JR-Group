@@ -20,7 +20,7 @@ class _JRHistoryState extends State<JRHistory> {
         // height: MediaQuery.of(context).size.height-appBarHeight,
         color: lightColorScheme.onPrimaryContainer,
         child: VisibilityDetector(
-            key: const Key('my-widget-key'),
+            key: const Key('my-key'),
             onVisibilityChanged: (visibilityInfo){
               setState(() {
                 _isVisible = visibilityInfo.visibleFraction*100 > 25.0;
