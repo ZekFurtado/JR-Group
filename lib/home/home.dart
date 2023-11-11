@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jr_group/home/components/navbarbuttons.dart';
 import 'package:jr_group/home/components/topimage.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../res/constants.dart';
 import '../view model/responsive.dart';
@@ -19,9 +20,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late final ScrollController _scrollController;
+  final ItemScrollController _scrollController = ItemScrollController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _isVisible = false;
+
+  List<Widget> components(context){
+    return [
+      ImageCarousel(
+        key: homeKey,
+      ),
+      About(key: aboutKey),
+      JRHistory(widgetKey: heritageKey)
+    ];
+  }
 
   List<Widget> desktopAppBarActions(context){
     return [
@@ -69,22 +80,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels>0) {
-        if (!_isVisible) {
-          setState(() {
-            _isVisible = true;
-          });
-        }
-      } else {
-        if (_isVisible) {
-          setState(() {
-            _isVisible = false;
-          });
-        }
-      }
-    });
+    // _scrollController = ScrollController();
+    // _scrollController.addListener(() {
+    //   if (_scrollController.position.pixels>0) {
+    //     if (!_isVisible) {
+    //       setState(() {
+    //         _isVisible = true;
+    //       });
+    //     }
+    //   } else {
+    //     if (_isVisible) {
+    //       setState(() {
+    //         _isVisible = false;
+    //       });
+    //     }
+    //   }
+    // });
   }
 
   @override
@@ -140,23 +151,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: ListView(
-        controller: _scrollController,
-        children: [
-          ImageCarousel(
-            key: homeKey,
-          ),
-          About(key: aboutKey),
-          JRHistory(key: heritageKey)
-        ],
-
+      body: ScrollablePositionedList.builder(
+        itemScrollController: _scrollController,
+        itemCount: 3,
+        itemBuilder:(context, index) => components(context).elementAt(index),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButton: _isVisible?FloatingActionButton(
         tooltip: 'Back to top',
         child: const Icon(Icons.keyboard_arrow_up),
         onPressed: (){
-          _scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
+          _scrollController.scrollTo(index: 0, duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
         },
       ):null,
     );

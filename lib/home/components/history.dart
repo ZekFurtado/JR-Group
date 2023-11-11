@@ -5,7 +5,9 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../../res/constants.dart';
 
 class JRHistory extends StatefulWidget {
-  const JRHistory({Key? key}) : super(key: key);
+  JRHistory({Key? key, required this.widgetKey}) : super(key: key);
+
+  final GlobalKey widgetKey;
 
   @override
   State<JRHistory> createState() => _JRHistoryState();
@@ -20,7 +22,7 @@ class _JRHistoryState extends State<JRHistory> {
         // height: MediaQuery.of(context).size.height-appBarHeight,
         color: lightColorScheme.onPrimaryContainer,
         child: VisibilityDetector(
-            key: const Key('my-widget-key'),
+            key: widget.widgetKey,
             onVisibilityChanged: (visibilityInfo){
               setState(() {
                 _isVisible = visibilityInfo.visibleFraction*100 > 25.0;
