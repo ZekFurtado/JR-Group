@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jr_group/home/home.dart';
 import 'package:jr_group/res/constants.dart';
+import 'package:jr_group/splash/splash.dart';
 
 import 'home/temp.dart';
 

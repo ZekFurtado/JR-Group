@@ -26,7 +26,7 @@ class _AboutState extends State<About> {
           alignment: Alignment.centerLeft
         )
       ),
-      height: MediaQuery.of(context).size.width>1800? MediaQuery.of(context).size.height-appBarHeight:MediaQuery.of(context).size.height*2,
+      height: MediaQuery.of(context).size.width>1800? MediaQuery.of(context).size.height-kToolbarHeight:MediaQuery.of(context).size.height*2,
       child: VisibilityDetector(
         key: Key('my-widget-key'),
         onVisibilityChanged: (visibilityInfo){

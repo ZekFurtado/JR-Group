@@ -5,9 +5,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../../res/constants.dart';
 
 class JRHistory extends StatefulWidget {
-  JRHistory({Key? key, required this.widgetKey}) : super(key: key);
-
-  final GlobalKey widgetKey;
+  const JRHistory({Key? key}) : super(key: key);
 
   @override
   State<JRHistory> createState() => _JRHistoryState();
@@ -18,11 +16,25 @@ class _JRHistoryState extends State<JRHistory> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        // height: MediaQuery.of(context).size.height-appBarHeight,
-        color: lightColorScheme.onPrimaryContainer,
-        child: VisibilityDetector(
-            key: widget.widgetKey,
+    return Stack(
+      children: [
+        Container(
+            height: MediaQuery.of(context).size.height-kToolbarHeight,
+            // color: lightColorScheme.onPrimaryContainer,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/Parchment-Paper-Texture1.jpg'),
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height-kToolbarHeight,
+          color: Colors.brown[900]?.withOpacity(0.6),
+        ),
+        VisibilityDetector(
+            key: const Key('my-key'),
             onVisibilityChanged: (visibilityInfo){
               setState(() {
                 _isVisible = visibilityInfo.visibleFraction*100 > 25.0;
@@ -40,23 +52,36 @@ class _JRHistoryState extends State<JRHistory> {
                   ),
                   child: Padding(
                     padding: EdgeInsets.only(left: edgePadding,right: edgePadding),
-                    child: MediaQuery.of(context).size.width>1500? Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: MediaQuery.of(context).size.width>1500? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const SizedBox(height: 200,),
-                        Text("Inherited",style: GoogleFonts.playfairDisplay(fontSize: 28,fontWeight: FontWeight.w600,color: Colors.white),),
-                        Text("Timeless",style: GoogleFonts.playfairDisplay(fontSize: 100,fontWeight: FontWeight.w600,color: const Color(0xffCF9529)),),
-                        Text("        Heritage & Culture",style: GoogleFonts.playfairDisplay(fontSize: 50,fontWeight: FontWeight.w600,color: Colors.white)),
                         const SizedBox(height: 100,),
-                        Row(
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Tile(title: "In 1980's", subtitle: "Riding the rapid development and economic wave", content: "Our remarkable corporate journey",),
-                            Tile(title: "In 1980's", subtitle: "Riding the rapid development and economic wave", content: "Our remarkable corporate journey",),
-                            Tile(title: "In 1980's", subtitle: "Riding the rapid development and economic wave", content: "Our remarkable corporate journey",),
-
+                            Text("Inherited",style: GoogleFonts.playfairDisplay(fontSize: 28,fontWeight: FontWeight.w600,color: Colors.white),),
+                            Text("Timeless",style: GoogleFonts.playfairDisplay(fontSize: 100,fontWeight: FontWeight.w600,color: const Color(0xffCF9529)),),
+                            Text("        Heritage & Culture",style: GoogleFonts.playfairDisplay(fontSize: 50,fontWeight: FontWeight.w600,color: Colors.white)),
                           ],
+                        ),
+                        // const SizedBox(height: 100,),
+                        Spacer(),
+                        SizedBox(
+                            height: 800,
+                            width: MediaQuery.of(context).size.width/2,
+                            child: Center(
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Tile(title: "In 1980's", subtitle: "Riding the rapid development and economic wave", content: "Our remarkable corporate journey",),
+                                    Tile(title: "In 1980's", subtitle: "Riding the rapid development and economic wave", content: "Our remarkable corporate journey",),
+                                  ],
+                                )
+                                ,
+                              ),
+                            )
                         ),
                         const SizedBox(height: 200,),
                       ],
@@ -73,6 +98,7 @@ class _JRHistoryState extends State<JRHistory> {
             )
 
         )
+      ],
     );
   }
 }
@@ -86,7 +112,7 @@ class Tile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height*0.5,
-      width: MediaQuery.of(context).size.width*0.2,
+      // width: MediaQuery.of(context).size.width*0.2,
       child: Card(
         color: Theme.of(context).cardColor,
         child: Column(

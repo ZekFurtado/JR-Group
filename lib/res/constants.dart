@@ -73,7 +73,6 @@ var tabTextTheme = GoogleFonts.montserrat(fontWeight: FontWeight.w700);
 
 double edgePadding = 0;
 double appBarPadding = 0;
-double appBarHeight = 0;
 double actionsLength = 0;
 
 final GlobalKey appBarKey = GlobalKey();
@@ -84,3 +83,6 @@ final GlobalKey industryKey = GlobalKey();
 final GlobalKey csrKey = GlobalKey();
 final GlobalKey blogKey = GlobalKey();
 final GlobalKey contactKey = GlobalKey();
+final GlobalKey backgroundImageKey = GlobalKey();
+
+List<GlobalKey> keys = [homeKey,aboutKey,heritageKey,csrKey];
