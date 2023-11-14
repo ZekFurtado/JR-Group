@@ -78,7 +78,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
               child: Center(
                   child: Padding(
                       padding: EdgeInsets.all(20),
-                      child: Text("Crafting Dreams, Shaping Spaces", style: GoogleFonts.dancingScript(color: Colors.white,fontSize: 100),textAlign: TextAlign.center,)
+                      child: Text("Crafting Dreams, Shaping Spaces", style: GoogleFonts.dancingScript(color: Colors.white,fontSize: 150),textAlign: TextAlign.center,)
                   )
               )
           )

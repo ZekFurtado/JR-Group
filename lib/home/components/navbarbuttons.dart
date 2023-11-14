@@ -13,6 +13,9 @@ class NavBarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      style: ButtonStyle(
+        overlayColor: MaterialStateProperty.all(Colors.brown.withOpacity(0.2))
+      ),
       onPressed: onPressed,
       child: Text(title,style: tabTextTheme,),
     );
