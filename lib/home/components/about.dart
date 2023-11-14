@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jr_group/res/app_icons_icons.dart';
 import 'package:jr_group/res/constants.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
